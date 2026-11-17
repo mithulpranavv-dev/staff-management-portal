@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Leaves - Staff Portal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a href="staff-dashboard.html" class="navbar-brand fw-bold">Staff Management Portal</a>
+        <div class="d-flex align-items-center">
+            <span class="text-white me-3" id="welcomeText"></span>
+            <button class="btn btn-outline-light btn-sm" id="logoutBtn">Logout</button>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <a href="staff-dashboard.html" class="btn btn-sm btn-outline-secondary mb-3">&larr; Back to Dashboard</a>
+
+    <div class="alert alert-info" id="leaveBalance">Loading paid leave balance...</div>
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-header font-bold">Apply for Leave</div>
+        <div class="card-body">
+            <form id="applyLeaveForm" class="row g-3">
+                <div class="col-md-3">
+                    <label class="form-label font-medium">Leave Category</label>
+                    <select class="form-select" id="leaveType" required>
+                        <option value="Casual Leave">Casual Leave</option>
+                        <option value="Sick Leave">Sick Leave</option>
+                        <option value="Earned Leave">Earned Leave</option>
+                        <option value="Duty Leave">Duty Leave</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label font-medium">From Date</label>
+                    <input type="date" class="form-control" id="fromDate" required>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label font-medium">To Date</label>
+                    <input type="date" class="form-control" id="toDate" required>
+                </div>
+                <div class="col-12">
+                    <label class="form-label font-medium">Reason for Leave</label>
+                    <textarea class="form-control" id="leaveReason" rows="2" placeholder="Enter reason..." required></textarea>
+                </div>
+                <div class="col-12 text-end">
+                    <button type="submit" class="btn btn-warning text-dark font-bold px-4">Submit Application</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-header font-bold">My Leave History</div>
+        <div class="card-body p-0">
+            <table class="table table-hover mb-0">
+                <thead class="table-light">
+                <tr>
+                    <th>Leave ID</th>
+                    <th>Category</th>
+                    <th>Dates</th>
+                    <th>Reason</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+                <tbody id="leavesTableBody"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="js/dashboard.js"></script>
+<script src="js/chatbot.js"></script>
+<script src="js/leave-balance.js"></script>
+<script src="js/staff-leaves.js"></script>
+</body>
+</html>

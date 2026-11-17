@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Staff Portal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+        <a href="#" id="navbarBrandLink" class="navbar-brand">Staff Management Portal</a>
+        <div class="d-flex align-items-center">
+            <span class="text-white me-3" id="welcomeText"></span>
+            <button class="btn btn-outline-light btn-sm" id="logoutBtn">Logout</button>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <h3 class="mb-4">Administrator Dashboard</h3>
+    <div class="row g-4">
+        <div class="col-md-3">
+            <a href="admin-employees.html" class="text-decoration-none">
+                <div class="card shadow-sm text-center p-4 h-100">
+                    <h5>Employee Details</h5>
+                    <p class="text-muted small mb-0">Full add/edit/delete access</p>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="attendance.html" class="text-decoration-none">
+                <div class="card shadow-sm text-center p-4 h-100">
+                    <h5>Attendance</h5>
+                    <p class="text-muted small mb-0">View all attendance records</p>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="leaves.html" class="text-decoration-none">
+                <div class="card shadow-sm text-center p-4 h-100">
+                    <h5>Leave Management</h5>
+                    <p class="text-muted small mb-0">View leave requests & Dean's decisions</p>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="payroll.html" class="text-decoration-none">
+                <div class="card shadow-sm text-center p-4 h-100">
+                    <h5>Payroll</h5>
+                    <p class="text-muted small mb-0">Generate and manage payslips</p>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="admin-attendance-scan.html" class="text-decoration-none">
+                <div class="card shadow-sm text-center p-4 h-100">
+                    <h5>Scan Attendance</h5>
+                    <p class="text-muted small mb-0">Scan staff QR to check in/out</p>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="smart-search.html" class="text-decoration-none">
+                <div class="card shadow-sm text-center p-4 h-100">
+                    <h5>Smart Search</h5>
+                    <p class="text-muted small mb-0">Search employees, tasks & leaves</p>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div id="onLeaveToday"></div>
+    <div id="aiInsights" class="mb-5"></div>
+</div>
+
+<script src="js/dashboard.js"></script>
+<script src="js/chatbot.js"></script>
+<script src="js/on-leave-today.js"></script>
+<script src="js/ai-insights.js"></script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOD Dashboard - Staff Portal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+        <a href="#" id="navbarBrandLink" class="navbar-brand">Staff Management Portal</a>
+        <div class="d-flex align-items-center">
+            <span class="text-white me-3" id="welcomeText"></span>
+            <button class="btn btn-outline-light btn-sm" id="logoutBtn">Logout</button>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <h3 class="mb-4">Head of Department Dashboard</h3>
+    <div class="row g-4">
+        <div class="col-md-3">
+            <a href="hod-employees.html" class="text-decoration-none">
+                <div class="card shadow-sm text-center p-4 h-100">
+                    <h5>Department Staff</h5>
+                    <p class="text-muted small mb-0">View your department's employees</p>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="hod-attendance.html" class="text-decoration-none">
+                <div class="card shadow-sm text-center p-4 h-100">
+                    <h5>Attendance</h5>
+                    <p class="text-muted small mb-0">View department attendance status</p>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="hod-leaves.html" class="text-decoration-none">
+                <div class="card shadow-sm text-center p-4 h-100">
+                    <h5>Leave Requests</h5>
+                    <p class="text-muted small mb-0">View department leave decisions</p>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="hod-my-leaves.html" class="text-decoration-none">
+                <div class="card shadow-sm text-center p-4 h-100">
+                    <h5>My Leaves</h5>
+                    <p class="text-muted small mb-0">Apply for leave and see your paid leave balance</p>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="hod-tasks.html" class="text-decoration-none">
+                <div class="card shadow-sm text-center p-4 h-100">
+                    <h5>Assign Tasks</h5>
+                    <p class="text-muted small mb-0">Assign and manage department tasks</p>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="staff-tasks.html" class="text-decoration-none">
+                <div class="card shadow-sm text-center p-4 h-100">
+                    <h5>My Tasks</h5>
+                    <p class="text-muted small mb-0">Update status of tasks assigned to you</p>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="smart-search.html" class="text-decoration-none">
+                <div class="card shadow-sm text-center p-4 h-100">
+                    <h5>Smart Search</h5>
+                    <p class="text-muted small mb-0">Search employees, tasks & leaves</p>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="my-qr-code.html" class="text-decoration-none">
+                <div class="card shadow-sm text-center p-4 h-100">
+                    <h5>My QR Code</h5>
+                    <p class="text-muted small mb-0">Show this to check in/out</p>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div id="onLeaveToday"></div>
+    <div id="performanceInsights"></div>
+    <div id="aiInsights" class="mb-5"></div>
+</div>
+
+<script src="js/dashboard.js"></script>
+<script src="js/chatbot.js"></script>
+<script src="js/on-leave-today.js"></script>
+<script src="js/performance-insights.js"></script>
+<script src="js/ai-insights.js"></script>
+</body>
+</html>

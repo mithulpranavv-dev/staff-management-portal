@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Management - Staff Portal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a href="#" id="navbarBrandLink" class="navbar-brand fw-bold">Staff Management Portal</a>
+        <div class="d-flex align-items-center">
+            <span class="text-white me-3" id="welcomeText"></span>
+            <button class="btn btn-outline-light btn-sm" id="logoutBtn">Logout</button>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <a href="#" id="backToDashboardLink" class="btn btn-sm btn-outline-secondary mb-3">&larr; Back to Dashboard</a>
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-header font-bold">Add New Employee</div>
+        <div class="card-body">
+            <form id="addEmployeeForm" class="row g-3">
+                <div class="col-md-3">
+                    <label class="form-label">Name</label>
+                    <input type="text" class="form-control" id="empName" required>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-control" id="empEmail" required>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Role</label>
+                    <select class="form-select" id="empRole" required>
+                        <option value="FACULTY_MEMBER">Faculty Member</option>
+                        <option value="HEAD_OF_DEPARTMENT">Head of Department</option>
+                        <option value="DEAN">Dean</option>
+                        <option value="ADMINISTRATOR">Administrator</option>
+                    </select>
+                </div>
+                <div class="col-md-2" id="empDepartmentWrapper">
+                    <label class="form-label">Department</label>
+                    <select class="form-select" id="empDepartment" required>
+                        <option value="">-- Select --</option>
+                        <option value="CSE">Computer Science and Engineering</option>
+                        <option value="ECE">Electronics and Communication Engineering</option>
+                        <option value="EEE">Electrical and Electronics Engineering</option>
+                        <option value="MECH">Mechanical Engineering</option>
+                        <option value="CIVIL">Civil Engineering</option>
+                        <option value="IT">Information Technology</option>
+                        <option value="AI_DS">Artificial Intelligence and Data Science</option>
+                        <option value="CHEMICAL">Chemical Engineering</option>
+                        <option value="BIOMEDICAL">Biomedical Engineering</option>
+                        <option value="MATHEMATICS">Mathematics</option>
+                        <option value="PHYSICS">Physics</option>
+                        <option value="CHEMISTRY">Chemistry</option>
+                    </select>
+                </div>
+                <div class="col-md-2" id="empDesignationWrapper" style="display:none;">
+                    <label class="form-label">Designation</label>
+                    <select class="form-select" id="empDesignation">
+                        <option value="">-- Select --</option>
+                        <option value="Assistant Professor">Assistant Professor</option>
+                        <option value="Associate Professor">Associate Professor</option>
+                        <option value="Professor">Professor</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Salary/Annum (₹)</label>
+                    <input type="number" class="form-control" id="empSalary" min="0" step="1000">
+                </div>
+
+                <div class="col-12">
+                    <label class="form-label">Face Enrollment <small class="text-muted">(optional \u2014 required for Face ID login)</small></label>
+                    <div class="d-flex align-items-center gap-3">
+                        <video id="enrollVideo" width="200" height="150" autoplay muted style="border-radius:8px; background:#000;"></video>
+                        <canvas id="enrollCanvas" width="200" height="150" style="display:none;"></canvas>
+                        <div>
+                            <button type="button" class="btn btn-sm btn-outline-secondary mb-2" id="startCameraBtn">Start Camera</button><br>
+                            <button type="button" class="btn btn-sm btn-outline-primary" id="captureFaceBtn" disabled>Capture Face</button>
+                            <div id="faceCaptureStatus" class="small mt-1 text-muted">No face captured yet</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary px-4">Add</button>
+                </div>
+            </form>
+            <div id="newEmployeeCredentials" class="alert alert-success mt-3 d-none"></div>
+        </div>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-header font-bold d-flex justify-content-between align-items-center">
+            All Employees
+            <div class="d-flex" style="width: 340px;">
+                <input type="text" class="form-control form-control-sm me-2" id="smartSearchInput" placeholder="Try: 'CSE staff' or 'admins'">
+                <button class="btn btn-sm btn-outline-primary" id="smartSearchBtn">Search</button>
+                <button class="btn btn-sm btn-outline-secondary ms-1 d-none" id="clearSearchBtn">Clear</button>
+            </div>
+        </div>
+        <div class="card-body p-0">
+            <table class="table table-hover mb-0">
+                <thead class="table-light">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Department</th>
+                    <th>Monthly Salary</th>
+                    <th>Per-Day Salary</th>
+                    <th class="text-end">Action</th>
+                </tr>
+                </thead>
+                <tbody id="employeeTableBody"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Employee Modal -->
+<div class="modal fade" id="editEmployeeModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Employee</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editEmployeeForm">
+                    <input type="hidden" id="editEmpId">
+                    <input type="hidden" id="editEmpRole">
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <input type="text" class="form-control" id="editEmpName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" id="editEmpEmail" required>
+                    </div>
+                    <div class="mb-3" id="editEmpDepartmentWrapper">
+                        <label class="form-label">Department</label>
+                        <select class="form-select" id="editEmpDepartment" required>
+                            <option value="">-- Select --</option>
+                            <option value="CSE">Computer Science and Engineering</option>
+                            <option value="ECE">Electronics and Communication Engineering</option>
+                            <option value="EEE">Electrical and Electronics Engineering</option>
+                            <option value="MECH">Mechanical Engineering</option>
+                            <option value="CIVIL">Civil Engineering</option>
+                            <option value="IT">Information Technology</option>
+                            <option value="AI_DS">Artificial Intelligence and Data Science</option>
+                            <option value="CHEMICAL">Chemical Engineering</option>
+                            <option value="BIOMEDICAL">Biomedical Engineering</option>
+                            <option value="MATHEMATICS">Mathematics</option>
+                            <option value="PHYSICS">Physics</option>
+                            <option value="CHEMISTRY">Chemistry</option>
+                        </select>
+                    </div>
+                    <div class="mb-3" id="editEmpDesignationWrapper" style="display:none;">
+                        <label class="form-label">Designation</label>
+                        <select class="form-select" id="editEmpDesignation">
+                            <option value="">-- Select --</option>
+                            <option value="Assistant Professor">Assistant Professor</option>
+                            <option value="Associate Professor">Associate Professor</option>
+                            <option value="Professor">Professor</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Salary/Annum (₹)</label>
+                        <input type="number" class="form-control" id="editEmpSalary" min="0" step="1000">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Face ID</label>
+                        <div class="d-flex align-items-center gap-3">
+                            <video id="editEnrollVideo" width="140" height="105" autoplay muted style="border-radius:8px; background:#000;"></video>
+                            <div>
+                                <button type="button" class="btn btn-sm btn-outline-secondary mb-1" id="editStartCameraBtn">Start Camera</button><br>
+                                <button type="button" class="btn btn-sm btn-outline-primary" id="editCaptureFaceBtn" disabled>Capture & Save Face</button>
+                                <div id="editFaceCaptureStatus" class="small mt-1 text-muted">No face captured this session</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+<script src="js/dashboard.js"></script>
+<script src="js/chatbot.js"></script>
+<script src="js/face-enrollment.js"></script>
+<script src="js/admin-employees.js"></script>
+</body>
+</html>

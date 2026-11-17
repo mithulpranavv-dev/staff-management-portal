@@ -1,0 +1,38 @@
+body {
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.card {
+    border: none;
+    border-radius: 12px;
+}
+
+.btn-primary {
+    background-color: #1e3c72;
+    border-color: #1e3c72;
+}
+
+.btn-primary:hover {
+    background-color: #16305e;
+    border-color: #16305e;
+}
+
+.navbar {
+    background-color: #1e3c72 !important;
+}
+
+.navbar-brand, .nav-link {
+    color: #ffffff !important;
+}
+
+.table thead {
+    background-color: #1e3c72;
+    color: #ffffff;
+}
+
+.card-header {
+    background-color: #1e3c72;
+    color: #ffffff;
+    border-radius: 12px 12px 0 0 !important;
+}
